@@ -12,10 +12,10 @@ from tqdm import tqdm
 
 import args
 import helper
-from data.base import data
+import data.base as data
 import module.srvp as srvp
-from module.utils import utils
-from trainer import train
+import module.utils as utils
+from train import train
 
 def train_worker(rank,opt,world_size):
     if rank != 0:
@@ -87,10 +87,8 @@ def train_worker(rank,opt,world_size):
     return status_code
 
 if __name__ == "__main__":
-    print("Hello")
     p = args.create_args()
     temp = p.parse_args()
-    print(temp)
     opt = helper.DotDict(vars(temp))
     assert torch.cuda.is_available()
 
