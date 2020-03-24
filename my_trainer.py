@@ -12,9 +12,9 @@ from tqdm import tqdm
 
 import args
 import helper
-import data.base import data
+from data.base import data
 import module.srvp as srvp
-import module.utils import utils
+from module.utils import utils
 from trainer import train
 
 def train_worker(rank,opt,world_size):
@@ -87,9 +87,11 @@ def train_worker(rank,opt,world_size):
     return status_code
 
 if __name__ == "__main__":
+    print("Hello")
     p = args.create_args()
-    opt = helper.DotDict(vars(p.parser_args()))
-
+    temp = p.parse_args()
+    print(temp)
+    opt = helper.DotDict(vars(temp))
     assert torch.cuda.is_available()
 
     num_gpus = torch.cuda.device_count()
